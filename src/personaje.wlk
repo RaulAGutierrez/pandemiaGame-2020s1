@@ -1,10 +1,8 @@
 
 
-object player {
+object pandemia {
 	var property position
 	var property image = "player.png"
-	
-	var property maizPlantado = []
 	
 	method moveteDerecha(){
 		self.position(self.position().right(1))
@@ -24,18 +22,6 @@ object player {
 	
 	method moveteA(unaPosicion){
 		self.position(unaPosicion)
-	}
-
-	method agregarMaiz(maiz){
-		maizPlantado.add(maiz)
-	}
-	
-	method sacarMaiz(maiz){
-		maizPlantado.remove(maiz)
-	}
-	
-	method cantidadDeMaiz() {
-		return maizPlantado.size()
 	}
 	
 }

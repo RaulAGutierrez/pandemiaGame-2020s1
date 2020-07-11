@@ -101,16 +101,17 @@ object simulacion {
 	
 	// simula el avance de un dia en pandemia
 	method avanzarUnDia() { 
+		manzanas.forEach( { manzana => manzana.pasarUnDia() } )
 		self.diaActual(self.diaActual() + 1)
-		self.transladoDePersonas()
-		self.propagacionContagio()
-		self.ejecutarCuracion()
+		//self.transladoDePersonas()
+		//self.propagacionContagio()
+		//self.ejecutarCuracion()
 	}
 
 	method crearManzana() {
-		const nuevaManzana = new Manzana()
+		var nuevaManzana = new Manzana()
 		// agregar la cantidad de personas segun self.personasPorManzana()
-		const persona = new Persona()
+		var persona = new Persona()
 		//{persona => nuevaManzana.mudarAEstaManzana(persona)}.apply(self.personasPorManzana()) ///
 		/* nuevaManzana.mudarAEstaManzana(persona)
 		nuevaManzana.mudarAEstaManzana(persona)
@@ -123,7 +124,7 @@ object simulacion {
 		nuevaManzana.mudarAEstaManzana(persona)
 		nuevaManzana.mudarAEstaManzana(persona)
 		*/
-		self.personasPorManzana().times({ veces => nuevaManzana.mudarAEstaManzana(persona) })  
+		self.personasPorManzana().times({ veces => nuevaManzana.mudarAEstaManzana(persona)})  
 		return nuevaManzana
 	}
 	

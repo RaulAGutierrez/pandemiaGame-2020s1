@@ -40,6 +40,7 @@ class Manzana {
 		self.transladoDeUnHabitante()
 		self.simulacionContagiosDiarios()
 		// despues agregar la curacion
+		self.simulacionCuracion()
 	}
 	
 	method mudarAEstaManzana(persona) {
