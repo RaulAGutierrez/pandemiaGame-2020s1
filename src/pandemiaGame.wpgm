@@ -1,39 +1,141 @@
 import wollok.game.*
+import personaje.*
+import drPandemia.*
 import simulacion.*
 
+
+
 object pandemiaGameConfig {
+
 	method height() = 4
+
 	method width() = 6
+
 	method title() = "Simuléichon"
+
 	
+
 	method configureGame() {
+
 		self.configureGameParameters()
+
 		self.agregarManzanas()
-		// agregar las teclas de acciones
-		// después, al agente de salud y sus teclas de acciones y movimiento
-	}
+		// Declaracion personajes y activacion de personajes
+		doctor.position(game.origin())
+		player.position(game.center())
+		const personajes = []
+		game.addVisual(player)
 		
-	method configureGameParameters() {
-		game.height(self.height())
-		game.width(self.width())
-		game.title(self.title())
-	}
-	
-	method agregarManzanas() {
-		(1..game.width()).forEach({x => 
-			(1..game.height()).forEach({y => 
-				const nuevaManzana = simulacion.crearManzana()
-				nuevaManzana.position(game.at(x-1,y-1))
-				simulacion.agregarManzana(nuevaManzana)
-				game.addVisual(nuevaManzana)
-			})
+		
+		keyboard.o().onPressDo({ 
+			if (not personajes.contains(doctor)) {
+				game.addVisual(doctor)
+				personajes.clear()
+				personajes.add(doctor) 
+			}
 		})
+		keyboard.p().onPressDo({ 
+			personajes.clear()
+			personajes.add(player)})
+		keyboard.d().onPressDo({
+				personajes.clear()
+				personajes.add(doctor) 
+		})
+
+		// agregar las teclas de acciones
+
+		keyboard.up().onPressDo ({ personajes.forEach( { personaje => personaje.moveteArriba() } ) })	
+		keyboard.down().onPressDo ({personajes.forEach( { personaje => personaje.moveteAbajo() } ) })	
+		keyboard.left().onPressDo ({personajes.forEach( { personaje => personaje.moveteIzquierda() } ) })	
+		keyboard.right().onPressDo ({personajes.forEach( { personaje => personaje.moveteDerecha() } ) })
+		
+		keyboard.num1().onPressDo({ 
+			if (personajes.contains(player)) { 
+				game.say(player, "dia de pandemia?  " + simulacion.diaActual() )
+			} 
+		})
+		keyboard.num2().onPressDo({ 
+			if (personajes.contains(player)) {
+			game.say(player, "personas en el barrio?  " + simulacion.cuantasPersonasVivenEnelBarrio() )
+			}
+		})
+		keyboard.num3().onPressDo({ 
+			if (personajes.contains(player)) {
+				game.say(player, "personas infectadas?  " + simulacion.cuantasPersonasEstanInfectadas() )
+			}
+		})
+		keyboard.num4().onPressDo({ 
+			if (personajes.contains(player)) {
+				game.say(player, "personas con sintomas?  " + simulacion.cuantasPersonasTienenSintomas() )
+			}
+		})
+		keyboard.num5().onPressDo({ 
+			if (personajes.contains(doctor)) {
+				game.say(doctor, "personas con aisladas:  " + simulacion.cuantasPersonasEstanAisladas() )
+			}
+		})
+		
+		
+		keyboard.num6().onPressDo({ 
+			if (personajes.contains(doctor)) {
+				simulacion.aislarInfectadosConSintomas() 
+			}
+		})
+		
+		keyboard.num8().onPressDo({ simulacion.importarCaso() })
+		keyboard.num9().onPressDo({ simulacion.avanzarUnDia() })
+		
+		// después, al agente de salud y sus teclas de acciones y movimiento
+		
+		
+		
 	}
+
+		
+
+	method configureGameParameters() {
+
+		game.height(self.height())
+
+		game.width(self.width())
+
+		game.title(self.title())
+		
+
+	}
+
 	
+
+	method agregarManzanas() {
+
+		(1..game.width()).forEach({x => 
+
+			(1..game.height()).forEach({y => 
+
+				const nuevaManzana = simulacion.crearManzana()
+
+				nuevaManzana.position(game.at(x-1,y-1))
+
+				simulacion.agregarManzana(nuevaManzana)
+
+				game.addVisual(nuevaManzana)
+
+			})
+
+		})
+
+	}
+
+	
+
 }
+
+
 
 program pandemiaGame {
-	pandemiaGameConfig.configureGame()
-	game.start()
-}
 
+	pandemiaGameConfig.configureGame()
+	
+	game.start()
+
+}

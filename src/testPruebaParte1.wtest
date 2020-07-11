@@ -1,0 +1,37 @@
+import personas.*
+import manzanas.*
+import simulacion.*
+
+describe  "test"{
+	const a = new Persona()
+	const b = new Persona()
+	const c = new Persona()
+	const d = new Persona()
+	const e = new Persona()
+	const f = new Persona()
+	const g = new Persona()
+	const h = new Persona()
+	const i = new Persona()
+	const j = new Persona()
+	
+	const manzana = new Manzana()
+	
+	test "manzana" {
+		manzana.mudarAEstaManzana(a)
+		manzana.mudarAEstaManzana(b)
+		manzana.mudarAEstaManzana(c)
+		manzana.mudarAEstaManzana(d)
+		manzana.mudarAEstaManzana(e)
+		manzana.mudarAEstaManzana(f)
+		manzana.mudarAEstaManzana(g)
+		manzana.mudarAEstaManzana(h)
+		manzana.mudarAEstaManzana(i)
+		manzana.mudarAEstaManzana(j)
+		
+		
+		assert.equals(10, manzana.cuantaGenteVive())
+		assert.equals(0, manzana.cantidadContagiadores())
+		// assert.equals(5, manzana.cantidadContagiadores())
+		
+	} 
+}
