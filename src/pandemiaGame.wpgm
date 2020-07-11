@@ -71,7 +71,7 @@ object pandemiaGameConfig {
 		})
 		keyboard.num5().onPressDo({ 
 			if (personajes.contains(doctor)) {
-				game.say(doctor, "personas con aisladas:  " + simulacion.cuantasPersonasEstanAisladas() )
+				game.say(doctor, "personas aisladas:  " + simulacion.cuantasPersonasEstanAisladas() )
 			}
 		})
 		
@@ -81,6 +81,13 @@ object pandemiaGameConfig {
 				simulacion.aislarInfectadosConSintomas() 
 			}
 		})
+		
+		keyboard.num7().onPressDo({ 
+			if (personajes.contains(doctor)) {
+				game.whenCollideDo(doctor, { manzana =>  manzana.mandarPersonasACuarentena()} )
+			}
+		})
+		
 		
 		keyboard.num8().onPressDo({ simulacion.importarCaso() })
 		keyboard.num9().onPressDo({ simulacion.avanzarUnDia() })

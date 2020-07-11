@@ -81,6 +81,11 @@ object simulacion {
 		manzanas.forEach( { manzana => manzana.aislarInfectadosConSintomas() } )
 	}
 	
+	// simular que convence a las persona de hacer cuarentena
+	method converserARespectarCuarentena() {
+		manzanas.forEach( { manzana => manzana.mandarPersonasACuarentena() } )
+	}
+	
 	// retorna una manzanda al azar
 	method elegirUnaManzanaAlAzar() { 
 		return manzanas.get(0.randomUpTo(manzanas.size() - 1)) 

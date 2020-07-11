@@ -98,6 +98,11 @@ class Manzana {
 		} )
 	}
 	
+	// mandar a la personas a que cumplar cuarentena
+	method mandarPersonasACuarentena() {
+		personas.forEach( { persona => persona.estaAislada(true) } )
+	}
+	
 	method transladoDeUnHabitante() {
 		const quienesSePuedenMudar = personas.filter({ pers => not pers.estaAislada() })
 		if (quienesSePuedenMudar.size() > 2) {
