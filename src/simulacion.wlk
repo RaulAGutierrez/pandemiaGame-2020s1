@@ -24,15 +24,15 @@ object simulacion {
 	
 	// retorna un booleano
 	method debeInfectarsePersona(persona,cantidadContagiadores) {  
-		//var siContagia = []
+		var ComoContagia
 		const chanceDeContagio = 
 		if (persona.respetaCuarentena()) { // FALTA METODO EN PERSONA: persona.respetaCuarentena() -> retorna booleano
 			self.chanceDeContagioConCuarentena() } 
 		else { 
 				self.chanceDeContagioSinCuarentena()
 			}
-		///if (persona.respetaCuarentena()) { siContagia = [1] } else { siContagia = [1,2,3,4] }
-		return  (1..cantidadContagiadores).any({n => self.tomarChance(chanceDeContagio)})
+		if (cantidadContagiadores == 4) { ComoContagia = cantidadContagiadores } else { ComoContagia = 1 }
+		return  (1..ComoContagia).any({n => self.tomarChance(chanceDeContagio)})
 		/// revisar
 			// la logica de 1 pasada si es hay un contagio o 4, va aca.
 			// (1..cantidadContagiadores).any({n => self.tomarChance(chanceDeContagio) 
@@ -124,8 +124,13 @@ object simulacion {
 		nuevaManzana.mudarAEstaManzana(persona)
 		nuevaManzana.mudarAEstaManzana(persona)
 		*/
-		self.personasPorManzana().times({ veces => nuevaManzana.mudarAEstaManzana(persona)})  
+		// self.personasPorManzana().times({ veces => nuevaManzana.mudarAEstaManzana(persona)})
+		self.SimularMudarMultiplesPersonasAManzana(nuevaManzana,self.personasPorManzana(),persona)
 		return nuevaManzana
+	}
+	
+	method SimularMudarMultiplesPersonasAManzana(manzana,cantidad,persona) {
+		(0..cantidad - 1).forEach({ x => manzana.mudarAEstaManzana(persona) })
 	}
 	
 	// Consultas:

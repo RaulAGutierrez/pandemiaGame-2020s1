@@ -26,7 +26,7 @@ class Manzana {
       		{ imagenSalida = color.imagen(naranja) } 
       		else if (self.cuantasPersonasEstanInfectadas().between(1,3)) 
       		{ imagenSalida = color.imagen(amarillo) } 
-      		else { imagenSalida = color.imagen(blanco) } 
+      		else { imagenSalida = color.imagen(transparente) } 
     	return imagenSalida
     }
     
@@ -136,15 +136,17 @@ class Manzana {
 	method cuantasPersonasTienenSintomas() {
 		return personas.count( { persona => persona.presentaSintomas() } )
 	}
-
+	
+	method codigoEnPantalla() { return 0 }
 }
 
 
 object blanco { method image() = return "blanco.png"}
-object naranjaOscuro { method image() = return "naranjaOscuro.png"}
-object amarillo { method image() = return "amarillo.png"}
-object rojo {method image() = return "rojo.png"}
-object naranja { method image() = return "naranja.png"}
+object naranjaOscuro { method image() = return "advertenciaNaranjaOscuro.png"}
+object amarillo { method image() = return "advertenciaAmarillo.png"}
+object rojo {method image() = return "advertenciaRoja.png"}
+object naranja { method image() = return "advertenciaNaranja.png"}
+object transparente { method image() = return "transparente.png"}
 
 object color { 
 	method imagen(color) { return color.image() }	

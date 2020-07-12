@@ -1,3 +1,6 @@
+import manzanas.*
+
+
 object doctor {
 	var property position
 	var property image = "Dr.Pandemia2.png"
@@ -22,5 +25,5 @@ object doctor {
 	method moveteA(unaPosicion){
 		self.position(unaPosicion)
 	}
-	
+	method codigoEnPantalla() { return 2 }
 }

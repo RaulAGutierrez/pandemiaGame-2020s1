@@ -25,15 +25,23 @@ object pandemiaGameConfig {
 			if (not personajes.contains(doctor)) {
 				game.addVisual(doctor)
 				personajes.clear()
-				personajes.add(doctor) 
+				personajes.add(doctor)
+				game.say(doctor, "Aqui llego el Doctor")
 			}
 		})
 		keyboard.p().onPressDo({ 
 			personajes.clear()
-			personajes.add(pandemia)})
+			personajes.add(pandemia)
+			game.say(pandemia, "Sigamos infectando")
+			})
+			
+			
 		keyboard.d().onPressDo({
+			if (personajes.contains(pandemia)) {
 				personajes.clear()
-				personajes.add(doctor) 
+				personajes.add(doctor)
+				game.say(doctor, "Doctor a la orden!") 
+			}
 		})
 
 		// agregar las teclas de acciones
@@ -63,40 +71,64 @@ object pandemiaGameConfig {
 				game.say(pandemia, "personas con sintomas?  " + simulacion.cuantasPersonasTienenSintomas() )
 			}
 		})
-		keyboard.num5().onPressDo({ 
+				
+		keyboard.num8().onPressDo({ simulacion.importarCaso() 
+			game.say(pandemia, "Ingreso un caso importando")
+		})
+		
+		keyboard.num9().onPressDo({ simulacion.avanzarUnDia() 
+			game.say(pandemia, "Avanzamos al dia  " + simulacion.diaActual() )
+		})
+		
+		keyboard.z().onPressDo({ 
 			if (personajes.contains(doctor)) {
 				game.say(doctor, "personas aisladas:  " + simulacion.cuantasPersonasEstanAisladas() )
 			}
 		})
 		
-		keyboard.num6().onPressDo({ 
+		keyboard.x().onPressDo({ 
 			if (personajes.contains(doctor)) {
 				simulacion.aislarInfectadosConSintomas() 
+				game.say(doctor, "aislemos a " + simulacion.cuantasPersonasEstanAisladas() +  "personas" )
 			}
 		})
 		
-		keyboard.num7().onPressDo({ 
+		keyboard.c().onPressDo({ 
 			if (personajes.contains(doctor)) {
 				game.whenCollideDo(doctor, { manzana =>  manzana.mandarPersonasACuarentena()} )
+				game.say(doctor, "aislemos aqui a " + (game.uniqueCollider(doctor)).cuantasPersonasEstanAisladas() +  "personas" )
 			}
 		})
 		
-		keyboard.num8().onPressDo({ simulacion.importarCaso() })
-		keyboard.num9().onPressDo({ simulacion.avanzarUnDia() })
+		keyboard.v().onPressDo({ 
+			if (personajes.contains(doctor)) {
+				 game.say(doctor, "persona en la cuadra " + (game.uniqueCollider(doctor)).cuantaGenteVive() )
+				 }	
+		})
 		
+		keyboard.b().onPressDo({ 
+			if (personajes.contains(doctor)) {
+				 game.say(doctor, "personas infectada " + (game.uniqueCollider(doctor)).cuantasPersonasEstanInfectadas() )
+				 }	
+		})
+		
+		keyboard.n().onPressDo({ 
+			if (personajes.contains(doctor)) {
+				 game.say(doctor, "personas aisladas " + (game.uniqueCollider(doctor)).cuantasPersonasEstanAisladas() + "en la cuadra" )
+				 }	
+		})
 	}
-
-		
+	
 
 	method configureGameParameters() {
 
 		game.height(self.height())
 		game.width(self.width())
 		game.title(self.title())
+		game.boardGround("barrio.png")
 		
 	}
 
-	
 
 	method agregarManzanas() {
 
