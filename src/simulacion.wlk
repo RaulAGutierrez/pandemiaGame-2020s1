@@ -26,31 +26,20 @@ object simulacion {
 	method debeInfectarsePersona(persona,cantidadContagiadores) {  
 		var ComoContagia
 		const chanceDeContagio = 
-		if (persona.respetaCuarentena()) { // FALTA METODO EN PERSONA: persona.respetaCuarentena() -> retorna booleano
+		if (persona.respetaCuarentena()) {
 			self.chanceDeContagioConCuarentena() } 
 		else { 
 				self.chanceDeContagioSinCuarentena()
 			}
 		if (cantidadContagiadores == 4) { ComoContagia = cantidadContagiadores } else { ComoContagia = 1 }
 		return  (1..ComoContagia).any({n => self.tomarChance(chanceDeContagio)})
-		/// revisar
-			// la logica de 1 pasada si es hay un contagio o 4, va aca.
-			// (1..cantidadContagiadores).any({n => self.tomarChance(chanceDeContagio) 
-   			// retorna un booleano 
 	}
 	
 	// define al azar si la persona tendra sintomas o no.
-	method debeTenerSintomas(persona) { // FALTA METODO EN PERSONA: persona.presentaSintomas(booleno)
+	method debeTenerSintomas(persona) { 
 		persona.presentaSintomas(self.tomarChance(self.chanceDePresentarSintomas()))
 	}
 	
-	/* define al azar (30% / 60%) si la persona estara aislada o NO, cuando no esta infectada
-	method estaraAisladaONo(persona) { 
-		if (not persona.presentaSintomas()) {
-			persona.estaAislada(self.tomarChance(30))
-		}
-	}
-	*/
 	// simmula la decision de las personas a quedarse aisladas o no
 	method decidirAislarseONo() {
 		manzanas.forEach( { manzana => manzana.simulacionDecisionDeAislarse() } )
@@ -81,11 +70,6 @@ object simulacion {
 		manzanas.forEach( { manzana => manzana.aislarInfectadosConSintomas() } )
 	}
 	
-	// simular que convence a las persona de hacer cuarentena
-	/*method convenserARespectarCuarentena() {
-		manzanas.forEach( { manzana => manzana.mandarPersonasACuarentena() } )
-	}
-	*/
 	// simular que convence a las persona de una cuadra a que hagan cuarentena
 	method convenserARespectarCuarentena(manzana) {
 		manzana.mandarPersonasACuarentena()
@@ -108,9 +92,6 @@ object simulacion {
 	method avanzarUnDia() { 
 		manzanas.forEach( { manzana => manzana.pasarUnDia() } )
 		self.diaActual(self.diaActual() + 1)
-		//self.transladoDePersonas()
-		//self.propagacionContagio()
-		//self.ejecutarCuracion()
 	}
 	method avanzarCincoDias() {
 		5.times({ veces => self.avanzarUnDia() })

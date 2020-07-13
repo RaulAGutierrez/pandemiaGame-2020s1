@@ -20,14 +20,4 @@ object pandemia {
 		self.position(self.position().down(1))
 	}
 	
-	method moveteA(unaPosicion){
-		self.position(unaPosicion)
-	}
-	
-	method movete() {
-		const x = 0.randomUpTo(self.position().width()).truncate(0)
-		const y = 0.randomUpTo(self.position().height()).truncate(0)
-		position = self.position().at(x,y) 
-	}
-	
 }

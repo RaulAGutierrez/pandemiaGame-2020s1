@@ -16,6 +16,7 @@ object pandemiaGameConfig {
 		self.configureGameParameters()
 		self.agregarManzanas()
 		// Declaracion personajes y activacion de personajes
+		
 		doctor.position(game.origin())
 		pandemia.position(game.center())
 		const personajes = []

@@ -52,7 +52,6 @@ class Manzana {
 	}
 	
 	method personaSeMudaA(persona, manzanaDestino) { // funcion complemento del traslado
-		// implementar
 		self.mudarDeEstaManzana(persona)
 		manzanaDestino.mudarAEstaManzana(persona)
 	}
