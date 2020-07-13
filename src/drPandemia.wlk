@@ -21,9 +21,5 @@ object doctor {
 	method moveteAbajo(){
 		self.position(self.position().down(1))
 	}
-	
-	method moveteA(unaPosicion){
-		self.position(unaPosicion)
-	}
 
 }
