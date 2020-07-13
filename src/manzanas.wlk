@@ -101,7 +101,7 @@ class Manzana {
 	
 	// mandar a la personas a que cumplar cuarentena
 	method mandarPersonasACuarentena() {
-		personas.forEach( { persona => persona.estaAislada(true) } )
+		personas.forEach( { persona => persona.respetaCuarentena(true) } )
 	}
 	
 	method transladoDeUnHabitante() {
@@ -132,12 +132,16 @@ class Manzana {
 		return personas.count( { persona => persona.estaAislada() } )
 	}
 	
+	// contar la cantidad de personas de estan en cuarentena en la manzana
+	method cuantasPersonasRespetanCuarentena() {
+		return personas.count( { persona => persona.respetaCuarentena() } )
+	}
+	
 	// contar la cantidad de personas que tienen sintomas en la manzana
 	method cuantasPersonasTienenSintomas() {
 		return personas.count( { persona => persona.presentaSintomas() } )
 	}
 	
-	method codigoEnPantalla() { return 0 }
 }
 
 

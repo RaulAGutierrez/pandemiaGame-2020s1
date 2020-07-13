@@ -6,7 +6,7 @@ object simulacion {
 	const property manzanas = []
 	
 	// parametros del juego
-	const property chanceDePresentarSintomas = 30
+	const property chanceDePresentarSintomas = 40
 	const property chanceDeContagioSinCuarentena = 25
 	const property chanceDeContagioConCuarentena = 2
 	const property personasPorManzana = 10
@@ -77,13 +77,18 @@ object simulacion {
 	}
 	
 	// simular aislara los infectados con sintomas
-	method aislarInfectadosConSintomas() {
+	method aislarInfectadosConSintomasEnElBarrio() {
 		manzanas.forEach( { manzana => manzana.aislarInfectadosConSintomas() } )
 	}
 	
 	// simular que convence a las persona de hacer cuarentena
-	method converserARespectarCuarentena() {
+	/*method convenserARespectarCuarentena() {
 		manzanas.forEach( { manzana => manzana.mandarPersonasACuarentena() } )
+	}
+	*/
+	// simular que convence a las persona de una cuadra a que hagan cuarentena
+	method convenserARespectarCuarentena(manzana) {
+		manzana.mandarPersonasACuarentena()
 	}
 	
 	// retorna una manzanda al azar
@@ -107,23 +112,14 @@ object simulacion {
 		//self.propagacionContagio()
 		//self.ejecutarCuracion()
 	}
+	method avanzarCincoDias() {
+		5.times({ veces => self.avanzarUnDia() })
+	}
 
 	method crearManzana() {
-		var nuevaManzana = new Manzana()
+		const nuevaManzana = new Manzana()
 		// agregar la cantidad de personas segun self.personasPorManzana()
-		var persona = new Persona()
-		//{persona => nuevaManzana.mudarAEstaManzana(persona)}.apply(self.personasPorManzana()) ///
-		/* nuevaManzana.mudarAEstaManzana(persona)
-		nuevaManzana.mudarAEstaManzana(persona)
-		nuevaManzana.mudarAEstaManzana(persona)
-		nuevaManzana.mudarAEstaManzana(persona)
-		nuevaManzana.mudarAEstaManzana(persona)
-		nuevaManzana.mudarAEstaManzana(persona)
-		nuevaManzana.mudarAEstaManzana(persona)
-		nuevaManzana.mudarAEstaManzana(persona)
-		nuevaManzana.mudarAEstaManzana(persona)
-		nuevaManzana.mudarAEstaManzana(persona)
-		*/
+		const persona = new Persona()
 		// self.personasPorManzana().times({ veces => nuevaManzana.mudarAEstaManzana(persona)})
 		self.SimularMudarMultiplesPersonasAManzana(nuevaManzana,self.personasPorManzana(),persona)
 		return nuevaManzana
@@ -140,17 +136,22 @@ object simulacion {
 	}
 	
 	// sumar cantidad de personas aisladas en la simunacion del barrio
-	method cuantasPersonasEstanAisladas() {
+	method cuantasPersonasEstanAisladasEnElBarrio() {
 		return manzanas.sum( { manzana => manzana.cuantasPersonasEstanAisladas() } )	
 	}
 	
 	// sumar la cantidad de personas infectadas en la simulacion del barrio
-	method cuantasPersonasEstanInfectadas() {
+	method cuantasPersonasEstanInfectadasEnElBarrio() {
 		return manzanas.sum( { manzana => manzana.cuantasPersonasEstanInfectadas() } )	
 	}
 	
 	// sumar al cantidad de personas con sintomas en la simulacion del barrio
-	method cuantasPersonasTienenSintomas() {
+	method cuantasPersonasTienenSintomasEnElBarrio() {
 		return manzanas.sum( { manzana => manzana.cuantasPersonasTienenSintomas() } )
+	}
+	
+	// sumar al cantidad de personas con sintomas en la simulacion del barrio
+	method cuantasPersonasRespetanCuarentenaEnElBarrio() {
+		return manzanas.sum( { manzana => manzana.cuantasPersonasRespetanCuarentena() } )
 	}
 }

@@ -3,7 +3,7 @@ import manzanas.*
 
 object doctor {
 	var property position
-	var property image = "Dr.Pandemia2.png"
+	var property image = "Dr.Pandemia.png"
 
 	
 	method moveteDerecha(){
@@ -25,5 +25,5 @@ object doctor {
 	method moveteA(unaPosicion){
 		self.position(unaPosicion)
 	}
-	method codigoEnPantalla() { return 2 }
+
 }

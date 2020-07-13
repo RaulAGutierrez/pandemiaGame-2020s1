@@ -30,5 +30,4 @@ object pandemia {
 		position = self.position().at(x,y) 
 	}
 	
-	method codigoEnPantalla() { return 1 }
 }
